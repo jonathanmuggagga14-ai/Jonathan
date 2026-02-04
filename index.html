@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Important Question 💌</title>
+  <style>
+    body {
+      font-family: "Arial Rounded MT Bold", Arial, sans-serif;
+      background: radial-gradient(circle at top, #2a0036, #0b0011);
+      color: #f5e9ff;
+      text-align: center;
+      min-height: 100vh;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    h2 {
+      font-size: 30px;
+      margin-bottom: 15px;
+    }
+
+    p {
+      font-size: 18px;
+      opacity: 0.9;
+    }
+
+    button {
+      padding: 12px 28px;
+      margin: 10px;
+      font-size: 18px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    button:hover {
+      transform: scale(1.06);
+      box-shadow: 0 0 15px rgba(255, 150, 220, 0.6);
+    }
+
+    .yes {
+      background: linear-gradient(135deg, #ff6fb1, #ff9bd6);
+      color: #1a001f;
+    }
+
+    .no {
+      background: #555;
+      color: #eee;
+    }
+
+    /* Floating hearts */
+    .heart {
+      position: absolute;
+      bottom: -20px;
+      font-size: 24px;
+      animation: floatUp 8s linear infinite;
+      opacity: 0.7;
+    }
+
+    @keyframes floatUp {
+      from {
+        transform: translateY(0) translateX(0);
+        opacity: 0.8;
+      }
+      to {
+        transform: translateY(-110vh) translateX(30px);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h2 id="text">So… would you want to be my boyfriend?</h2>
+
+  <div id="buttons">
+    <button class="yes" onclick="yes()">Yes 💗</button>
+    <button class="no" onclick="no()">No</button>
+  </div>
+
+  <script>
+    function yes() {
+      document.body.innerHTML = `
+        <h2>MWAH 😘💖</h2>
+        <p>I’m really happy you said yes.</p>
+      `;
+    }
+
+    function no() {
+      document.getElementById("text").innerText = "Are you sure about that?";
+      document.getElementById("buttons").innerHTML = `
+        <button class="yes" onclick="reallyNo()">Yes</button>
+        <button class="no" onclick="goBack()">No</button>
+      `;
+    }
+
+    function reallyNo() {
+      document.getElementById("text").innerText = "Like… really really sure?";
+      document.getElementById("buttons").innerHTML = `
+        <button class="yes" onclick="finalNo()">Yes</button>
+        <button class="no" onclick="goBack()">No</button>
+      `;
+    }
+
+    function finalNo() {
+      document.body.innerHTML = `
+        <h2>Okay 💔</h2>
+        <p>I respect that — still glad I asked.</p>
+      `;
+    }
+
+    function goBack() {
+      location.reload();
+    }
+
+    // create floating hearts
+    setInterval(() => {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.innerText = Math.random() > 0.5 ? "💗" : "💜";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = (6 + Math.random() * 4) + "s";
+      document.body.appendChild(heart);
+
+      setTimeout(() => heart.remove(), 10000);
+    }, 500);
+  </script>
+
+</body>
+</html>
